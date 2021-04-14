@@ -35,7 +35,7 @@ class Report_a extends MY_Controller
 
             $data[$row->tanggal][$row->idkriteria] = (array) $row;
         }
-        // dd($data);
+
         return $this->load->view('templates/reporting', [
             'title'             => $this->data['title'],
             'route'             => $this->data['route'],

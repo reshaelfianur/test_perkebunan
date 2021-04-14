@@ -67,4 +67,16 @@ class M_transaksi_detail extends MY_Model
             ->get($this->table . ' td')
             ->result();
     }
+
+    public function get_report_b()
+    {
+        return $this->db->select('t.divisi, t.tanggal, k.name, k.id AS idkriteria')
+            ->select_sum('td.jumlah')
+            ->join($this->kriteria . ' k', 'td.idbuah = k.id')
+            ->join($this->transaksi . ' t', 't.notrans = td.notrans')
+            ->group_by(['divisi', 'tanggal', 'name', 'idkriteria'])
+            ->order_by('divisi ASC', 'tanggal ASC', 'name ASC')
+            ->get($this->table . ' td')
+            ->result();
+    }
 }
